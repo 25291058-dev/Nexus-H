@@ -1,0 +1,173 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus-H | Bio-Inclusión Médica en Solana</title>
+    <style>
+        :root {
+            --primary: #9945FF; /* Solana Purple */
+            --secondary: #14F195; /* Solana Green */
+            --dark: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #F0F0F0;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: 'Space Grotesk', 'Segoe UI', sans-serif; background-color: var(--dark); color: var(--text); margin: 0; padding: 0; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        /* Efecto de Fondo Matrix/Cyberpunk */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(153, 69, 255, 0.15), transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(20, 241, 149, 0.15), transparent 40%);
+            z-index: -1;
+        }
+
+        /* Navbar Glassmorphism */
+        nav {
+            position: fixed; top: 0; width: 100%; background: var(--glass); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border); padding: 15px 50px; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        nav .logo { font-size: 1.5em; font-weight: bold; color: var(--secondary); text-transform: uppercase; letter-spacing: 2px; }
+        nav .links a { color: var(--text); text-decoration: none; margin-left: 20px; font-size: 0.9em; transition: 0.3s; }
+        nav .links a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        header {
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px; position: relative;
+        }
+        header h1 {
+            font-size: 4em; margin: 0; text-transform: uppercase; letter-spacing: -2px;
+            background: linear-gradient(135deg, var(--text), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+        header p { font-size: 1.5em; max-width: 600px; margin: 20px 0; opacity: 0.8; }
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark); border: none; padding: 15px 40px; font-size: 1em; font-weight: bold;
+            border-radius: 5px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;
+            margin-top: 20px; text-decoration: none; display: inline-block;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(20, 241, 149, 0.5); }
+
+        /* Secciones Generales */
+        .section { padding: 100px 50px; max-width: 1200px; margin: 0 auto; position: relative; }
+        .section-title { font-size: 2.5em; border-left: 4px solid var(--secondary); padding-left: 15px; margin-bottom: 60px; text-transform: uppercase; letter-spacing: -1px; }
+        
+        /* Grid de Características */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card {
+            background: var(--glass); border: 1px solid var(--border); padding: 30px; border-radius: 12px;
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .card:hover { border-color: var(--secondary); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(20, 241, 149, 0.1); }
+        .card h3 { color: var(--secondary); margin-top: 0; font-size: 1.4em; }
+        .card p { opacity: 0.8; font-size: 0.95em; }
+        .card .icon { font-size: 2em; margin-bottom: 20px; color: var(--primary); }
+
+        /* Mockup del Dispositivo IoMT (Animado) */
+        .mockup-container { text-align: center; margin-top: 50px; position: relative; }
+        .mockup-img {
+            max-width: 60%; 
+            border-radius: 20px;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 50px rgba(153, 69, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Footer */
+        footer { background: #010101; padding: 40px 50px; text-align: center; border-top: 1px solid var(--border); font-size: 0.85em; color: #666; }
+        footer a { color: var(--secondary); text-decoration: none; }
+
+        /* Animaciones */
+        @keyframes titleGlow { from { text-shadow: 0 0 10px rgba(255,255,255,0.3); } to { text-shadow: 0 0 20px rgba(20, 241, 149, 0.5); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 15px 20px; } header h1 { font-size: 2.5em; } .section { padding: 60px 20px; }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Nexus-H</div>
+    <div class="links">
+        <a href="#vision">Visión</a>
+        <a href="#tecnologia">Tecnología</a>
+        <a href="#dispositivo">Dispositivo</a>
+    </div>
+</nav>
+
+<header>
+    <h1>La Hora Dorada,<br>Reimaginada.</h1>
+    <p>Bio-Inclusión Médica en Solana: Salvando vidas mediante identidad biométrica inmutable y datos críticos en tiempo real.</p>
+    <a href="#vision" class="btn">Explorar el Futuro</a>
+</header>
+
+<div id="vision" class="section">
+    <h2 class="section-title">El Problema y Nuestra Misión</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="icon">🕒</div>
+            <h3>Urgencia Crítica</h3>
+            <p>En accidentes graves, cada segundo perdido en identificación o búsqueda de historial médico (alergias, tipo de sangre) reduce drásticamente las probabilidades de supervivencia.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🗣️</div>
+            <h3>Barreras Lingüísticas</h3>
+            <p>La falta de comunicación con pacientes de comunidades indígenas o extranjeros impide diagnósticos precisos en momentos cruciales.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🔗</div>
+            <h3>Datos Inmutables</h3>
+            <p>Nuestra misión es usar la blockchain de Solana para garantizar que los datos vitales sean seguros, inalterables y accesibles instantáneamente.</p>
+        </div>
+    </div>
+</div>
+
+<div id="dispositivo" class="section">
+    <h2 class="section-title">El Ecosistema IoMT (Prototipo)</h2>
+    <div class="mockup-container">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" alt="Nexus-H Prototipo" class="mockup-img">
+    </div>
+    <p style="text-align: center; max-width: 700px; margin: 40px auto 0; opacity: 0.8;">
+        Este prototipo de dispositivo médico IoT (Internet of Medical Things) utiliza un sensor de huella dactilar para generar un hash biométrico único. Este hash es la "llave" inmutable que vincula al paciente con su historial médico crítico encriptado en la blockchain de Solana.
+    </p>
+</div>
+
+<div id="tecnologia" class="section">
+    <h2 class="section-title">Desarrollado en Solana (Arquitectura)</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="icon">🦀</div>
+            <h3>Smart Contract en Rust</h3>
+            <p>Utilizamos el framework Anchor para definir estructuras de datos seguras y optimizadas para BPF (Berkeley Packet Filter), garantizando la integridad de cada registro de paciente.</p>
+        </div>
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Velocidad y Bajo Costo</h3>
+            <p>Solana nos permite realizar transacciones en menos de 1 segundo y con costos casi nulos, vital para la escalabilidad en servicios de emergencia globales.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🌐</div>
+            <h3>Inclusión e Interoperabilidad</h3>
+            <p>La arquitectura de Nexus-H está diseñada para ser interoperable con sistemas de salud existentes, ofreciendo datos críticos traducidos automáticamente para el personal médico.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Proyecto Nexus-H | Solana Hackathon Entry | Luis - Software Multiplataforma.</p>
+    <p>Visita el código fuente en <a href="https://github.com/25291058-dev/Nexus-H.git" target="_blank">github.com/Nexus-H</a>.</p>
+</footer>
+
+</body>
+</html>
