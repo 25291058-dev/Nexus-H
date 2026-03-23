@@ -48,4 +48,4 @@ Este proyecto no es solo código; es una herramienta de justicia social.
 * **Meta:** Fusión de Ingeniería de Software y Medicina (Especialidad en Neurocirugía).
 
 ---
-🔗 **Demo en vivo:** [Explora el Ecosistema Nexus-H](file:///C:/Users/L%C3%B2pez/Documents/Nexus-H.html
+🔗 **Demo en vivo:** [Explora el Ecosistema Nexus-H](https://25291058-dev.github.io/Nexus-H/
