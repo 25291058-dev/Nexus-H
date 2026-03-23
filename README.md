@@ -22,5 +22,5 @@ Utilizamos un **Smart Contract en Rust (Anchor)** para vincular un hash biométr
 - `Cargo.toml`: Dependencias y optimización de compilación.
 
 ## 👤 Autor
-- **Luis** - Software Multiplataforma.
+- **Ruiz Lopez Luis Angel** - Software Multiplataforma.
 - Proyecto para la **Solana Hackathon**.
