@@ -1,26 +1,43 @@
-# 🏥 Nexus-H: Salud e Inclusión en la "Hora Dorada"
+# 🧬 Nexus-H | Bio-Inclusión Médica en la Red de Solana
 
-**Nexus-H** es un ecosistema **IoMT (Internet of Medical Things)** desarrollado sobre la blockchain de **Solana** para optimizar la respuesta médica en situaciones de emergencia.
+![Status](https://img.shields.io/badge/Status-Prototype-purple) 
+![Sector](https://img.shields.io/badge/Sector-HealthTech-green)
+![Chain](https://img.shields.io/badge/Blockchain-Solana-blue)
 
-## 🚀 El Problema
-En accidentes críticos, cada segundo cuenta (la "Hora Dorada"). La falta de identificación, el desconocimiento de alergias o tipo de sangre, y las barreras de idioma (especialmente en comunidades indígenas) causan muertes evitables.
+**Nexus-H** es un ecosistema de respuesta crítica diseñado para eliminar las barreras de información en la "Hora Dorada" de las emergencias médicas. Mediante el uso de **identidad biométrica inmutable** y la blockchain de **Solana**, permitimos que paramédicos y médicos accedan a datos vitales en segundos.
 
-## 💡 La Solución
-Utilizamos un **Smart Contract en Rust (Anchor)** para vincular un hash biométrico con datos médicos vitales de forma inmutable y segura.
-* **Velocidad:** Confirmaciones en menos de 1 segundo gracias a Solana.
-* **Inclusión:** Traducción de datos críticos para paramédicos sin importar el idioma del paciente.
-* **Seguridad:** Identificación biométrica sin necesidad de documentos físicos.
+---
 
-## 🛠️ Stack Técnico
-- **Blockchain:** Solana (Devnet/Localnet)
-- **Framework:** Anchor v0.30+ (Rust)
-- **Lógica de Negocio:** Gestión de estados de pacientes y metadatos médicos inmutables.
+## 🚀 La Visión
+Mi meta es fusionar el desarrollo de software de vanguardia con la **neurocirugía**. Nexus-H busca que ningún paciente, especialmente aquellos con discapacidades o barreras lingüísticas (incluyendo lenguas indígenas), reciba una atención inadecuada por falta de información.
 
-## 📁 Estructura del Proyecto
-- `/programs/nexus_h`: Contrato inteligente en Rust (`lib.rs`).
-- `Anchor.toml`: Configuración del despliegue y Program ID.
-- `Cargo.toml`: Dependencias y optimización de compilación.
+### Pilares del Proyecto:
+* **Identificación Biométrica:** El cuerpo del paciente es su llave de acceso (Huella/Rostro).
+* **Inclusión Radical:** Interfaz adaptable con soporte para Braille, lenguaje de señas y traducción de idiomas indígenas.
+* **Interconectividad Total:** Comunicación en tiempo real entre ambulancia (Paramédicos) y quirófano (Especialistas).
+* **Seguridad Blockchain:** Datos encriptados y protegidos bajo estándares de interoperabilidad (FHIR/HL7).
 
-## 👤 Autor
-- **Ruiz Lopez Luis Angel** - Software Multiplataforma.
-- Proyecto para la **Solana Hackathon**.
+---
+
+## 🛠️ Stack Tecnológico
+* **Frontend:** HTML5, CSS3 (Glassmorphism UI), JavaScript.
+* **Blockchain:** Solana Network (Rust/Anchor).
+* **IA & Visión:** Python (TensorFlow/OpenCV) - *En desarrollo*.
+* **Hardware:** Sensores biométricos IoMT (Internet of Medical Things).
+
+---
+
+## 🏥 Impacto Social
+Este dispositivo está pensado para dar prioridad a:
+1.  **Personas con Discapacidad:** Garantizando que su historial médico y necesidades específicas sean visibles de inmediato.
+2.  **Comunidades Indígenas:** Rompiendo la brecha del idioma en situaciones de vida o muerte.
+3.  **Casos de Emergencia Extrema:** Previniendo reacciones alérgicas o errores por falta de antecedentes médicos en pacientes inconscientes.
+
+---
+
+## 👨‍💻 Sobre el Autor
+**Luis** - Estudiante de Desarrollo de Software Multiplataforma y aspirante a Médico Cirujano (Especialidad en Neurocirugía). 
+*"Construyendo la tecnología que usaré en el quirófano para salvar vidas."*
+
+---
+🔗 **Demo en vivo:** [Haz clic aquí para ver la Landing Page](https://25291058-dev.github.io/Nexus-H/)
