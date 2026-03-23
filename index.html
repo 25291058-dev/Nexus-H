@@ -1,0 +1,247 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus-H | Bio-Inclusión Médica en Solana</title>
+    <style>
+        :root {
+            --primary: #9945FF;
+            --secondary: #14F195;
+            --dark: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
+            --text: #F0F0F0;
+            --cb: cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background-color: var(--dark); 
+            color: var(--text); 
+            margin: 0; 
+            overflow-x: hidden; 
+            scroll-behavior: smooth; 
+        }
+        
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(153, 69, 255, 0.12), transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(20, 241, 149, 0.12), transparent 40%);
+            z-index: -1;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed; top: 0; width: 100%; background: var(--glass); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border); padding: 15px 50px; z-index: 100;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        nav .logo { font-size: 1.5em; font-weight: bold; color: var(--secondary); text-transform: uppercase; letter-spacing: 2px; }
+        nav .links a { color: var(--text); text-decoration: none; margin-left: 20px; font-size: 0.9em; transition: 0.3s; }
+        nav .links a:hover { color: var(--primary); }
+
+        /* --- ANIMACIONES DE ENTRADA --- */
+        .reveal { opacity: 0; filter: blur(10px); transition: all 1s var(--cb); will-change: transform, opacity; }
+        .reveal-bottom { transform: translateY(40px); }
+        .reveal-left { transform: translateX(-40px); }
+        .reveal-scale { transform: scale(0.9); }
+        .reveal.active { opacity: 1; filter: blur(0); transform: translate(0) scale(1); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* --- HERO --- */
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        header h1 {
+            font-size: 4.5em; margin: 0; text-transform: uppercase; letter-spacing: -2px;
+            background: linear-gradient(135deg, var(--text), var(--secondary));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        header p { font-size: 1.4em; max-width: 700px; margin: 25px 0; opacity: 0.8; }
+        .btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--dark); border: none; padding: 18px 45px; font-size: 1em; font-weight: bold;
+            border-radius: 5px; cursor: pointer; transition: 0.3s var(--cb); text-transform: uppercase; 
+            letter-spacing: 1px; text-decoration: none; display: inline-block;
+        }
+        .btn:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(20, 241, 149, 0.4); }
+
+        /* --- SECCIONES Y TARJETAS --- */
+        .section { padding: 100px 50px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 2.8em; border-left: 5px solid var(--secondary); padding-left: 20px; margin-bottom: 60px; text-transform: uppercase; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .card {
+            background: var(--glass); border: 1px solid var(--border); padding: 40px; border-radius: 16px;
+            cursor: pointer; position: relative; overflow: hidden; transition: 0.4s var(--cb);
+        }
+
+        /* EFECTO SPOTLIGHT VERDE */
+        .card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(20, 241, 149, 0.1), transparent 40%);
+            z-index: 0; opacity: 0; transition: opacity 0.5s;
+        }
+        .card:hover::before { opacity: 1; }
+        .card:hover { border-color: var(--secondary); transform: translateY(-10px); box-shadow: 0 10px 40px rgba(20, 241, 149, 0.15); }
+
+        .card * { position: relative; z-index: 1; }
+        .card h3 { color: var(--secondary); margin-bottom: 15px; }
+        .card .icon { font-size: 2.5em; margin-bottom: 25px; display: block; transition: 0.4s var(--cb); }
+        .card:hover .icon { transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 10px var(--secondary)); }
+
+        /* --- MODALES --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+            display: none; justify-content: center; align-items: center; z-index: 1000; opacity: 0; transition: 0.5s;
+        }
+        .modal-content {
+            background: rgba(10, 10, 10, 0.95); border: 1px solid var(--secondary);
+            padding: 50px; border-radius: 24px; max-width: 650px; width: 90%;
+            transform: translateY(40px); transition: 0.5s var(--cb);
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .close-modal { position: absolute; top: 20px; right: 20px; background: none; border: none; color: var(--secondary); font-size: 2em; cursor: pointer; }
+
+        /* --- DISPOSITIVO --- */
+        .mockup-container { text-align: center; margin-top: 50px; }
+        .mockup-img {
+            max-width: 65%; border-radius: 24px; border: 1px solid var(--border);
+            box-shadow: 0 0 60px rgba(153, 69, 255, 0.2); animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* --- FOOTER --- */
+        footer { padding: 80px 50px; text-align: center; border-top: 1px solid var(--border); background: #010101; }
+        footer p { color: #888; margin: 10px 0; }
+        footer .github-link { color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 1.1em; transition: 0.3s; }
+        footer .github-link:hover { text-shadow: 0 0 10px var(--secondary); opacity: 0.8; }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav>
+    <div class="logo">Nexus-H</div>
+    <div class="links">
+        <a href="#vision">Visión</a>
+        <a href="#dispositivo">Dispositivo</a>
+        <a href="#tecnologia">Tecnología</a>
+    </div>
+</nav>
+
+<header class="reveal reveal-scale active">
+    <h1>La Hora Dorada,<br>Reimaginada.</h1>
+    <p>Bio-Inclusión Médica en Solana: Salvando vidas mediante identidad biométrica inmutable y datos críticos en tiempo real.</p>
+    <a href="#vision" class="btn">Explorar el Proyecto</a>
+</header>
+
+<div id="vision" class="section">
+    <h2 class="section-title reveal reveal-left">El Problema y Nuestra Misión</h2>
+    <div class="grid">
+        <div class="card reveal reveal-bottom delay-1" onclick="openModal('urgencia')">
+            <span class="icon">🕒</span>
+            <h3>Urgencia Crítica</h3>
+            <p>En accidentes graves, cada segundo cuenta. Nexus-H reduce drásticamente los tiempos de identificación.</p>
+        </div>
+        <div class="card reveal reveal-bottom delay-2" onclick="openModal('idioma')">
+            <span class="icon">🗣️</span>
+            <h3>Barreras Lingüísticas</h3>
+            <p>Traducción automática para asegurar que la atención médica sea inclusiva y precisa.</p>
+        </div>
+        <div class="card reveal reveal-bottom delay-3" onclick="openModal('solana_mision')">
+            <span class="icon">🔗</span>
+            <h3>Datos Inmutables</h3>
+            <p>Usamos Solana para garantizar que tu historial médico sea seguro, inalterable y veloz.</p>
+        </div>
+    </div>
+</div>
+
+<div id="dispositivo" class="section">
+    <h2 class="section-title reveal reveal-left">El Ecosistema IoMT (Prototipo)</h2>
+    <div class="mockup-container reveal reveal-scale">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000" alt="Nexus-H Prototipo" class="mockup-img">
+    </div>
+    <p class="reveal reveal-bottom" style="text-align: center; max-width: 800px; margin: 40px auto 0; opacity: 0.8;">
+        Este prototipo utiliza un sensor de huella dactilar para generar un hash biométrico único vinculado a Solana.
+    </p>
+</div>
+
+<div id="tecnologia" class="section">
+    <h2 class="section-title reveal reveal-left">Arquitectura Solana</h2>
+    <div class="grid">
+        <div class="card reveal reveal-bottom delay-1" onclick="openModal('rust')">
+            <span class="icon">🦀</span>
+            <h3>Smart Contract en Rust</h3>
+            <p>Estructuras de datos seguras y optimizadas para máxima integridad mediante Anchor.</p>
+        </div>
+        <div class="card reveal reveal-bottom delay-2" onclick="openModal('speed')">
+            <span class="icon">⚡</span>
+            <h3>Velocidad y Bajo Costo</h3>
+            <p>Transacciones en milisegundos, vital para la escalabilidad en emergencias globales.</p>
+        </div>
+        <div class="card reveal reveal-bottom delay-3" onclick="openModal('inclusion')">
+            <span class="icon">🌐</span>
+            <h3>Inclusión Total</h3>
+            <p>Datos críticos traducidos automáticamente para romper las barreras del personal médico.</p>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Proyecto Nexus-H | Solana Hackathon Entry | Ruiz Lopez Luis Angel.</p>
+    <p>Código fuente: <a href="https://github.com/25291058-dev/Nexus-H.git" target="_blank" class="github-link">GitHub Repository</a></p>
+</footer>
+
+<script>
+    // 1. Scroll Reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // 2. Spotlight
+    document.querySelectorAll('.card').forEach(card => {
+        card.onmousemove = e => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+            card.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        };
+    });
+
+    // 3. Modales detallados
+    const info = {
+        urgencia: { title: "Urgencia Crítica", text: "Nexus-H permite identificar pacientes inconscientes en segundos, proporcionando historial de alergias y tipo de sangre antes de llegar al hospital." },
+        idioma: { title: "Inclusión Médica", text: "Integramos módulos de traducción automática para asegurar que pacientes de comunidades indígenas reciban diagnósticos correctos sin barreras de lenguaje." },
+        solana_mision: { title: "Seguridad Blockchain", text: "La inmutabilidad de Solana garantiza que los registros médicos no puedan ser alterados maliciosamente, asegurando confianza total." },
+        rust: { title: "Infraestructura Rust", text: "Usamos Anchor para crear programas en Solana que gestionan la identidad biométrica con el máximo nivel de seguridad criptográfica." },
+        speed: { title: "Rendimiento en Tiempo Real", text: "Gracias a los tiempos de bloque de 400ms de Solana, la información del paciente está disponible casi al instante en cualquier parte del mundo." },
+        inclusion: { title: "Interoperabilidad Global", text: "Diseñado para conectarse con sistemas de salud existentes, permitiendo una red global de bio-inclusión médica sin fronteras." }
+    };
+
+    function openModal(id) {
+        document.getElementById('modalBody').innerHTML = `<h2 style="color:#14F195">${info[id].title}</h2><p style="line-height:1.8; font-size:1.1em">${info[id].text}</p>`;
+        document.getElementById('modalOverlay').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('modalOverlay').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+</script>
+</body>
+</html>
